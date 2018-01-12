@@ -9,6 +9,7 @@ public class RssHandler extends DefaultHandler{
 
     private Web webActual;
     private StringBuilder sbTexto;
+    private boolean max=false,min=false;
 
     public Web getWebActual() {
         return webActual;
@@ -28,11 +29,13 @@ public class RssHandler extends DefaultHandler{
         if (this.webActual != null) {
             if (localName.equals("nombre")) {
                 webActual.setNombre(sbTexto.toString());
-            } else if (localName.equals("maxima")) {
+            } else if ((localName.equals("maxima"))&&(max==false)) {
                 webActual.setMax(sbTexto.toString());
+                max=true;
             }
-            else if (localName.equals("minima")) {
+            else if ((localName.equals("minima"))&&(min==false)) {
                 webActual.setMin(sbTexto.toString());
+                min=true;
             }
 
             sbTexto.setLength(0);

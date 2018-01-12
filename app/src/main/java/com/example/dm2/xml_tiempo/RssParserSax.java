@@ -1,5 +1,7 @@
 package com.example.dm2.xml_tiempo;
 
+import org.xml.sax.InputSource;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -23,7 +25,9 @@ public class RssParserSax {
         try {
             SAXParser parser = factory.newSAXParser();
             RssHandler handler = new RssHandler();
-            parser.parse(this.getInputStream(), handler);
+            InputSource is = new InputSource (this.getInputStream());
+            is.setEncoding("ISO-8859-1");
+            parser.parse(is, handler);
             return handler.getWebActual();
         }
         catch (Exception e) {
